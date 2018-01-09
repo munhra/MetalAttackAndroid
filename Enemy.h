@@ -9,7 +9,7 @@
 #include "EnemyParams.h"
 #include "BandSprite.h"
 #include "vector"
-#include "LevelScene.h"
+//#include "LevelScene.h"
 #include "Level.h"
 
 USING_NS_CC;
@@ -52,7 +52,7 @@ public:
     Sprite *shootSprite;
     Action *enemyAction;
     Action *enemyAttack;
-    LevelScene *delegate;
+    void *delegate;
     bool removeObject;
     ParticleSystem *enemyParticle;
     vector<Enemy *> activeEnemies;
@@ -95,7 +95,7 @@ public:
 
     virtual Enemy initwithStartPosition(Point position,
                                         double actionTime,
-                                        LevelScene *delegate,
+                                        void *delegate,
                                         EnemyParams params,
                                         EnemyPositions enemyPosition,
                                         Point shootEndPos);

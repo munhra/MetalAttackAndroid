@@ -6,7 +6,7 @@
 #define PROJ_ANDROID_STUDIO_LEVELSCENE_H
 
 #include "cocos2d.h"
-//#include "RobotBlaster.h"
+#include "Enemy.h"
 #include "vector"
 #include <editor-support/spritebuilder/CCBXNodeLoader.h>
 #include <editor-support/spritebuilder/SpriteBuilder.h>
@@ -22,15 +22,15 @@ public:
     virtual bool init();
     CREATE_FUNC(LevelScene);
 
-    /*
+
     Point endTouch;
-    vector<RobotBlaster *> *activeEnemies;
-    vector<RobotBlaster *> *killedEnemies;
+    vector<Enemy *> *activeEnemies;
+    vector<Enemy *> *killedEnemies;
     float rotationAngle;
     bool moved;
     int waveEnemiesLeft;
     int levelEnemiesLeft;
-    */
+
 
 
     /*

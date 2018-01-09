@@ -9,6 +9,7 @@
 #include "vector"
 #include "EnemyParams.h"
 #include "RobotBlaster.h"
+#include "LevelScene.h"
 #include "Level.h"
 #include "map"
 

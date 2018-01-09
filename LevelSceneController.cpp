@@ -10,7 +10,6 @@ LevelSceneController *LevelSceneController::instance = 0;
 
 LevelSceneController *LevelSceneController::sharedInstance() {
 
-
     if (!LevelSceneController::instance) {
         LevelSceneController::instance = new LevelSceneController();
     }

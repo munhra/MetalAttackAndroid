@@ -15,9 +15,6 @@ class Level
 {
 public:
 
-    //virtual bool init();
-    //CREATE_FUNC(Level);
-
     vector<int> waves;
     vector<string> avaliableEnemies;
     int totalLevelEnemies;

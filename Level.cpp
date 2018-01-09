@@ -4,16 +4,6 @@
 
 #include "Level.h"
 
-/*
-bool Level::init() {
-
-    if (!Node::init()) {
-        return false;
-    }
-
-    return true;
-}*/
-
 Level::Level() {
 
 }

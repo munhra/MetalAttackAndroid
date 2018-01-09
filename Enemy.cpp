@@ -23,7 +23,7 @@ Enemy::~Enemy() {
 
 Enemy Enemy::initwithStartPosition(Point position,
                             double actionTime,
-                            LevelScene *delegate,
+                            void *delegate,
                             EnemyParams params,
                             EnemyPositions enemyPosition,
                             Point shootEndPos) {

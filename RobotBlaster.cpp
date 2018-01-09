@@ -3,6 +3,7 @@
 //
 
 #include "RobotBlaster.h"
+#include "LevelScene.h"
 
 bool RobotBlaster::init() {
 
@@ -12,7 +13,7 @@ bool RobotBlaster::init() {
     return true;
 }
 
-Enemy RobotBlaster::initwithStartPosition(Point position, double actionTime, LevelScene *delegate, EnemyParams params,
+Enemy RobotBlaster::initwithStartPosition(Point position, double actionTime, void *delegate, EnemyParams params,
                                           EnemyPositions enemyPosition, Point shootEndPos) {
 
 }

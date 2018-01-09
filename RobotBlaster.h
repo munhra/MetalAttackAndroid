@@ -20,7 +20,7 @@ public:
 
     virtual Enemy initwithStartPosition(Point position,
                                         double actionTime,
-                                        LevelScene *delegate,
+                                        void *delegate,
                                         EnemyParams params,
                                         EnemyPositions enemyPosition,
                                         Point shootEndPos) override;

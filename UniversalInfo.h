@@ -14,11 +14,42 @@ using namespace std;
 class UniversalInfo {
 public:
 
-    UniversalInfo();
+    static UniversalInfo *sharedInstance();
 
-    ~UniversalInfo();
+    enum GameState {GAME_STARTED, WAVE_CLEARED, LEVEL_CLEARED,
+        GAME_OVER, GAME_PAUSED};
+
+    enum DeviceType {IPHONE_5, IPHONE_4_OR_LESS, IPHONE_6, IPHONE_6P, IPAD, IPAD_RETINA};
+
+    enum nextScence {MENU, NEXT_LEVEL, STORE, REPLAY};
+
+    bool gotoStore;
+    bool gotoNextLevel;
+
+    bool isDeviceIpad;
+    Point screenCenter;
+
+    Point enemyPosition1;
+    Point enemyPosition2;
+    Point enemyPosition3;
+    Point enemyPosition4;
+    Point enemyPosition5;
+    Point enemyPosition6;
+    Point enemyPosition7;
+    Point enemyPosition8;
+
+    Point calculateAnchorPoint(Point anchorPos, int w, int h);
+    DeviceType getDeviceType();
+    string addZeroesToNumber(string *number, int zeroes);
+    Sprite *getSpriteWithCoinAnimation();
+
+private:
+
+    static UniversalInfo *instance;
 
 protected:
+    UniversalInfo();
+    ~UniversalInfo();
 
 
 };
