@@ -8,6 +8,7 @@
 #include "cocos2d.h"
 #include "Enemy.h"
 #include "vector"
+#include "UniversalInfo.h"
 #include <editor-support/spritebuilder/CCBXNodeLoader.h>
 #include <editor-support/spritebuilder/SpriteBuilder.h>
 #include <editor-support/spritebuilder/CCBXNodeLoader.h>
@@ -31,51 +32,41 @@ public:
     int waveEnemiesLeft;
     int levelEnemiesLeft;
 
+    UniversalInfo::GameState gameState;
 
-
-    /*
-     * CGPoint beginTouch;
-    CGPoint endTouch;
-    NSMutableArray *activeEnemies;
-    NSMutableArray *killedEnemies;
-    float rotationAngle;
-    BOOL moved;
-    int waveEnemiesLeft;
-    int levelEnemiesLeft;
-    GameState gameState;
     int levelNumber;
     int waveNumber;
     int scoreCount;
     int totalLevel;
     int levelCoins;
-    CCTouch *playerTouch;
+
+    Touch *playerTouch;
     Level *currentLevel;
 
-    CCSprite *enemyPOS1;
-    CCSprite *enemyPOS2;
-    CCSprite *enemyPOS3;
-    CCSprite *enemyPOS4;
-    CCSprite *enemyPOS5;
-    CCSprite *enemyPOS6;
-    CCSprite *enemyPOS7;
-    CCSprite *enemyPOS8;
+    Sprite *enemyPOS1;
+    Sprite *enemyPOS2;
+    Sprite *enemyPOS3;
+    Sprite *enemyPOS4;
+    Sprite *enemyPOS5;
+    Sprite *enemyPOS6;
+    Sprite *enemyPOS7;
+    Sprite *enemyPOS8;
 
-    NSMutableArray *coinAnimFrames;
+    //NSMutableArray *coinAnimFrames;
 
-    //items effect
     int coinMultiplier;
-    BOOL noCoolDown;
+    bool noCoolDown;
 
-    //InvulnerabilityPowerUP *invulnerabilityPowerUP;
+    /*
     RevivalPowerUp *revivalPowerUp;
     CoinMultiplierPowerUp *coinMultiplierPowerUp;
     HealthPowerUp *healthPowerUp;
+    */
 
-    WaveClearedBanner *waveClearedSprite;
+    //WaveClearedBanner *waveClearedSprite;
 
     int levelContext;
 
-     */
 
 protected:
     LevelScene();

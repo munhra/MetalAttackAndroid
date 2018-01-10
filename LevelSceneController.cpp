@@ -4,6 +4,7 @@
 
 #include <json/document.h>
 #include "LevelSceneController.h"
+#include "UniversalInfo.h"
 #include <string>
 
 LevelSceneController *LevelSceneController::instance = 0;
@@ -161,11 +162,46 @@ void LevelSceneController::loadLevelJson() {
 
 }
 
-vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int waveNumber) {
+vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int wave) {
 
     vector<RobotBlaster> *stageEnemyArray;
     Enemy *newEnemy1;
     int delay = 5;
+
+    Level *loadlevel = loadedLevels->at(levelNumber);
+
+    int typeOfEnemies = loadlevel->avaliableEnemies.size();
+    int groupCount = loadlevel->waves.at(wave) / 8;
+
+    int randonEnemy;
+    string enemyName;
+    EnemyParams *eparams;
+
+    int levelContext = loadlevel->levelContext;
+
+    //there should be a switch case here but for now let's consider level one only
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("enemySheetNew.plist");
+
+
+    for (int i = 0; i < groupCount ; i++) {
+        if (i == 0) {
+            delay = 1;
+        }else{
+            delay = 5;
+        }
+    }
+
+    randonEnemy = rand() % typeOfEnemies;
+    enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
+    eparams = enemyDictMutable[enemyName];
+    eparams->typeOfPowerUp = EnemyParams::COIN;
+
+    newEnemy1 = new RobotBlaster();
+    //newEnemy1->initwithStartPosition()
+
+
+
+
 
 
 }
@@ -184,11 +220,13 @@ Scene *LevelSceneController::loadLevelScene(int levelNumber, int wave) {
     CCBXReader *reader = CCBXReader::createFromFile("Levels/Level1.ccbi");
     scnDelegate =  (LevelScene *) reader->createNode(this, SceneScaleType::MINSCALE);
 
-
-
+    scnDelegate->totalLevel = totalLevels;
+    scnDelegate->levelNumber = levelNumber;
+    scnDelegate->levelContext = levelContext;
+    scnDelegate->levelEnemiesLeft = loadlevel->totalLevelEnemies;
+    scnDelegate->waveEnemiesLeft = loadlevel->waves.at(wave);
 
     return (Scene *)scnDelegate;
-
 }
 
 void LevelSceneController::startEnemyMovment() {

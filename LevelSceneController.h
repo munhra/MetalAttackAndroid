@@ -34,7 +34,7 @@ public:
     static LevelSceneController *sharedInstance();
     virtual void loadEnemyDictFromJson();
     virtual Scene *loadLevelScene(int levelNumber, int wave);
-    virtual vector<RobotBlaster *> *createEnemies(int levelNumber, int waveNumber);
+    virtual vector<RobotBlaster *> *createEnemies(int levelNumber, int wave);
     virtual void loadLevelJson();
     virtual void startEnemyMovment();
 

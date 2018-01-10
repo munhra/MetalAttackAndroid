@@ -26,17 +26,17 @@ public:
     bool gotoStore;
     bool gotoNextLevel;
 
-    bool isDeviceIpad;
-    Point screenCenter;
+    bool isDeviceIpad();
+    Point screenCenter();
 
-    Point enemyPosition1;
-    Point enemyPosition2;
-    Point enemyPosition3;
-    Point enemyPosition4;
-    Point enemyPosition5;
-    Point enemyPosition6;
-    Point enemyPosition7;
-    Point enemyPosition8;
+    Point enemyPosition1();
+    Point enemyPosition2();
+    Point enemyPosition3();
+    Point enemyPosition4();
+    Point enemyPosition5();
+    Point enemyPosition6();
+    Point enemyPosition7();
+    Point enemyPosition8();
 
     Point calculateAnchorPoint(Point anchorPos, int w, int h);
     DeviceType getDeviceType();
@@ -45,6 +45,8 @@ public:
 
 private:
 
+    const float screenHideProportion = 0.046875;
+    Point screenSize;
     static UniversalInfo *instance;
 
 protected:

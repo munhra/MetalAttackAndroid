@@ -41,6 +41,9 @@ public:
 
     void update(float) override;
 
+    RobotBlaster();
+    ~RobotBlaster();
+
 private:
 
     virtual void divideAnimations(SpriteFrame *frame,
@@ -55,12 +58,6 @@ private:
     virtual Point calculateBandGuysPosition();
     virtual void removeEnemyFire(Node *node);
 
-
-
-protected:
-
-    RobotBlaster();
-    ~RobotBlaster();
 };
 
 
