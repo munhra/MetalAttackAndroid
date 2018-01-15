@@ -48,7 +48,6 @@ bool HelloWorld::init() {
     
     LevelSceneController::sharedInstance()->loadLevelJson();
 
-
     cocos2d::spritebuilder::NodeLoaderLibrary *library = NodeLoaderLibrary::getDefault();
 
     using HelloWorldClassLoader = SimpleNodeLoader<HelloWorldClass>;
@@ -59,8 +58,6 @@ bool HelloWorld::init() {
 
     using DummyLayerLoader = SimpleNodeLoader<DummyLayer>;
     library->registerNodeLoader("DummyLayer", &DummyLayerLoader::create);
-
-
 
     using MainSceneLoader = SimpleNodeLoader<MainScene>;
     library->registerNodeLoader("MainScene", &MainSceneLoader::create);
@@ -92,10 +89,17 @@ bool HelloWorld::init() {
     //CCBXReader *reader = CCBXReader::createFromFile("DoorTransition.ccbi");
     //CCBXReader *reader = CCBXReader::createFromFile("MainMenu.ccbi");
     //CCBXReader *reader = CCBXReader::createFromFile("BandGuys/Fake.ccbi");
-    CCBXReader *reader = CCBXReader::createFromFile("Levels/Level1.ccbi");
 
-    cocos2d::Node * scene = reader->createNode(this, SceneScaleType::MINSCALE);
-    this->addChild(scene);
+
+    //CCBXReader *reader = CCBXReader::createFromFile("Levels/Level1.ccbi");
+    //CCBXReader *reader = CCBXReader::createFromFile("levelScene");
+
+    Scene *levelScene = LevelSceneController::sharedInstance()->loadLevelScene(1,0);
+
+
+    //cocos2d::Node * scene = reader->createNode(this, SceneScaleType::MINSCALE);
+    //this->addChild(scene);
+    this->addChild(levelScene);
 
     return true;
 

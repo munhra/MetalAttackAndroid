@@ -21,11 +21,11 @@ Enemy::~Enemy() {
 }
 
 
-Enemy Enemy::initwithStartPosition(Point position,
+Enemy *Enemy::initwithStartPosition(Point position,
                             double actionTime,
                             void *delegate,
-                            EnemyParams params,
-                            EnemyPositions enemyPosition,
+                            EnemyParams *params,
+                            EnemyPositions defPosition,
                             Point shootEndPos) {
 
 

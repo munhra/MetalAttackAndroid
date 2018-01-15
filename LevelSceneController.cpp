@@ -159,13 +159,12 @@ void LevelSceneController::loadLevelJson() {
 
     CCLOG("LevelLoadedWithSuccess");
 
-
 }
 
 vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int wave) {
 
-    vector<RobotBlaster> *stageEnemyArray;
-    Enemy *newEnemy1;
+    vector<RobotBlaster *> *stageEnemyArray = new vector<RobotBlaster *>();
+    RobotBlaster *newEnemy1;
     int delay = 5;
 
     Level *loadlevel = loadedLevels->at(levelNumber);
@@ -175,7 +174,7 @@ vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int
 
     int randonEnemy;
     string enemyName;
-    EnemyParams *eparams;
+    EnemyParams * eparams;
 
     int levelContext = loadlevel->levelContext;
 
@@ -186,24 +185,125 @@ vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int
     for (int i = 0; i < groupCount ; i++) {
         if (i == 0) {
             delay = 1;
-        }else{
+        } else {
             delay = 5;
         }
+
+        //Position 7
+
+        randonEnemy = rand() % typeOfEnemies;
+        enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
+        eparams = enemyDictMutable[enemyName];
+        eparams->typeOfPowerUp = EnemyParams::COIN;
+
+        newEnemy1 = new RobotBlaster();
+        newEnemy1->initwithStartPosition(UniversalInfo::sharedInstance()->enemyPosition7(),
+                                         1.7*i+delay, NULL, eparams,
+                                         Enemy::POS7, UniversalInfo::sharedInstance()->enemyPosition3());
+
+
+        stageEnemyArray->push_back(newEnemy1);
+
+        //Position 8
+
+        randonEnemy = rand() % typeOfEnemies;
+        enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
+        eparams = enemyDictMutable[enemyName];
+        eparams->typeOfPowerUp = EnemyParams::COIN;
+
+        newEnemy1 = new RobotBlaster();
+        newEnemy1->initwithStartPosition(UniversalInfo::sharedInstance()->enemyPosition8(),
+                                         2.9*i+delay, NULL, eparams,
+                                         Enemy::POS8, UniversalInfo::sharedInstance()->enemyPosition4());
+
+        stageEnemyArray->push_back(newEnemy1);
+
+
+        //Position 4
+
+        randonEnemy = rand() % typeOfEnemies;
+        enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
+        eparams = enemyDictMutable[enemyName];
+        eparams->typeOfPowerUp = EnemyParams::COIN;
+
+        newEnemy1 = new RobotBlaster();
+        newEnemy1->initwithStartPosition(UniversalInfo::sharedInstance()->enemyPosition4(),
+                                         2.5*i+delay, NULL, eparams,
+                                         Enemy::POS4, UniversalInfo::sharedInstance()->enemyPosition8());
+
+        stageEnemyArray->push_back(newEnemy1);
+
+        //Position 2
+
+        randonEnemy = rand() % typeOfEnemies;
+        enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
+        eparams = enemyDictMutable[enemyName];
+        eparams->typeOfPowerUp = EnemyParams::COIN;
+
+        newEnemy1 = new RobotBlaster();
+        newEnemy1->initwithStartPosition(UniversalInfo::sharedInstance()->enemyPosition2(),
+                                         1*i+delay, NULL, eparams,
+                                         Enemy::POS2, UniversalInfo::sharedInstance()->enemyPosition6());
+
+        stageEnemyArray->push_back(newEnemy1);
+
+        //Position 6
+
+        randonEnemy = rand() % typeOfEnemies;
+        enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
+        eparams = enemyDictMutable[enemyName];
+        eparams->typeOfPowerUp = EnemyParams::COIN;
+
+        newEnemy1 = new RobotBlaster();
+        newEnemy1->initwithStartPosition(UniversalInfo::sharedInstance()->enemyPosition6(),
+                                         1.8*i+delay, NULL, eparams,
+                                         Enemy::POS6, UniversalInfo::sharedInstance()->enemyPosition2());
+
+        stageEnemyArray->push_back(newEnemy1);
+
+        //Position 1
+
+        randonEnemy = rand() % typeOfEnemies;
+        enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
+        eparams = enemyDictMutable[enemyName];
+        eparams->typeOfPowerUp = EnemyParams::COIN;
+
+        newEnemy1 = new RobotBlaster();
+        newEnemy1->initwithStartPosition(UniversalInfo::sharedInstance()->enemyPosition1(),
+                                         0.3*i+delay, NULL, eparams,
+                                         Enemy::POS1, UniversalInfo::sharedInstance()->enemyPosition5());
+
+        stageEnemyArray->push_back(newEnemy1);
+
+        //Position 3
+
+        randonEnemy = rand() % typeOfEnemies;
+        enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
+        eparams = enemyDictMutable[enemyName];
+        eparams->typeOfPowerUp = EnemyParams::COIN;
+
+        newEnemy1 = new RobotBlaster();
+        newEnemy1->initwithStartPosition(UniversalInfo::sharedInstance()->enemyPosition3(),
+                                         0.3*i+5+delay, NULL, eparams,
+                                         Enemy::POS3, UniversalInfo::sharedInstance()->enemyPosition7());
+
+        stageEnemyArray->push_back(newEnemy1);
+
+        //Position 5
+
+        randonEnemy = rand() % typeOfEnemies;
+        enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
+        eparams = enemyDictMutable[enemyName];
+        eparams->typeOfPowerUp = EnemyParams::COIN;
+
+        newEnemy1 = new RobotBlaster();
+        newEnemy1->initwithStartPosition(UniversalInfo::sharedInstance()->enemyPosition5(),
+                                         0.3*i+5+delay, NULL, eparams,
+                                         Enemy::POS5, UniversalInfo::sharedInstance()->enemyPosition1());
+
+        stageEnemyArray->push_back(newEnemy1);
+
     }
-
-    randonEnemy = rand() % typeOfEnemies;
-    enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
-    eparams = enemyDictMutable[enemyName];
-    eparams->typeOfPowerUp = EnemyParams::COIN;
-
-    newEnemy1 = new RobotBlaster();
-    //newEnemy1->initwithStartPosition()
-
-
-
-
-
-
 }
 
 Scene *LevelSceneController::loadLevelScene(int levelNumber, int wave) {

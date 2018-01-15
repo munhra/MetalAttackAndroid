@@ -42,44 +42,36 @@ Point UniversalInfo::screenCenter() {
 }
 
 Point UniversalInfo::enemyPosition1() {
-
-    
-
+    return screenSize *= -screenHideProportion;
 }
 
 Point UniversalInfo::enemyPosition2() {
-
-
+    return Vec2(- screenSize.x * screenHideProportion, screenSize.y * 0.5);
 }
 
 Point UniversalInfo::enemyPosition3() {
-
-
+    return Vec2(-screenSize.x * screenHideProportion , screenSize.y *(1+screenHideProportion));
 }
 
 Point UniversalInfo::enemyPosition4() {
-
-
+    return Vec2(screenSize.x * 0.5, screenSize.y*(1+screenHideProportion));
 }
 
 Point UniversalInfo::enemyPosition5() {
-
+    return Vec2(screenSize.x * (1+screenHideProportion), screenSize.y*(1+screenHideProportion));
 
 }
 
 Point UniversalInfo::enemyPosition6() {
-
-
+    return Vec2(screenSize.x * (1+screenHideProportion), screenSize.y * 0.5);
 }
 
 Point UniversalInfo::enemyPosition7() {
-
-
+    return Vec2(screenSize.x * (1+screenHideProportion), -screenSize.y * screenHideProportion);
 }
 
 Point UniversalInfo::enemyPosition8() {
-
-
+    return Vec2(screenSize.x * 0.5, -screenSize.y * screenHideProportion);
 }
 
 

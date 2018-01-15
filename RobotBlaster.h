@@ -18,11 +18,11 @@ public:
     virtual bool init();
     CREATE_FUNC(RobotBlaster);
 
-    virtual Enemy initwithStartPosition(Point position,
+    virtual Enemy *initwithStartPosition(Point position,
                                         double actionTime,
-                                        void *delegate,
-                                        EnemyParams params,
-                                        EnemyPositions enemyPosition,
+                                        void *scnDelegate,
+                                        EnemyParams *params,
+                                        EnemyPositions defPosition,
                                         Point shootEndPos) override;
 
     virtual void restartMovement() override;
@@ -46,6 +46,9 @@ public:
 
 private:
 
+    CallFunc *doEndMeeleAttackAnim;
+    CallFunc *doEndAttackAnim;
+
     virtual void divideAnimations(SpriteFrame *frame,
                                   std::vector<SpriteFrame> *animFrames,
                                   std::vector<SpriteFrame> *attackFrames,
@@ -54,10 +57,9 @@ private:
 
     virtual void performGeneralHitAnimation(Point hitPoint);
     virtual void playEnemyDieSound();
-    virtual void doEndAttackAnim();
     virtual Point calculateBandGuysPosition();
     virtual void removeEnemyFire(Node *node);
-
+    virtual void initializeAnimationsCallBack();
 };
 
 

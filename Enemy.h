@@ -57,22 +57,18 @@ public:
     ParticleSystem *enemyParticle;
     vector<Enemy *> activeEnemies;
 
-
-
     int scorePoints;
     string name;
     int frames;
 
     EnemyParams::PowerUp typeOfPowerUp;
-    vector<Node *> activeShoots;
-
+    vector<Node *> *activeShoots;
 
     EnemyPositions definedPosition;
     EnemyParams::AtackType attackType;
 
     bool isMeeleAttacking;
     bool isInMovement;
-
 
     Point shootStartPosition;
     int shootZIndex;
@@ -87,17 +83,19 @@ public:
     string *shootHit;
     double shootInterval;
     double enemyUpdateSeconds;
+    EnemyParams::ShootStyle shootStyle;
+
 
 
     virtual bool init();
     virtual void startMovement();
     virtual void restartMovement();
 
-    virtual Enemy initwithStartPosition(Point position,
+    virtual Enemy *initwithStartPosition(Point position,
                                         double actionTime,
                                         void *delegate,
-                                        EnemyParams params,
-                                        EnemyPositions enemyPosition,
+                                        EnemyParams *params,
+                                        EnemyPositions defPosition,
                                         Point shootEndPos);
     virtual int receiveHeroShoot(float damage, bool killNow, Rect shootRect);
 
@@ -126,9 +124,11 @@ public:
      *
      */
 
-protected:
     Enemy();
     ~Enemy();
+
+protected:
+
 };
 
 
