@@ -49,10 +49,10 @@ private:
     CallFunc *doEndMeeleAttackAnim;
     CallFunc *doEndAttackAnim;
 
-    virtual void divideAnimations(SpriteFrame *frame,
-                                  std::vector<SpriteFrame> *animFrames,
-                                  std::vector<SpriteFrame> *attackFrames,
-                                  int frameidex);
+    virtual void divideAnimations(AnimationFrame *frame,
+                                  Vector<AnimationFrame *> animFrames,
+                                  Vector<AnimationFrame *> attackFrames,
+                                  int frameindex);
 
 
     virtual void performGeneralHitAnimation(Point hitPoint);

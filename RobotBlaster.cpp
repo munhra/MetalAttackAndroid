@@ -15,7 +15,7 @@ bool RobotBlaster::init() {
 
 Enemy *RobotBlaster::initwithStartPosition(Point position, double actionTime, void *scnDelegate, EnemyParams *params,
                                           EnemyPositions defPosition, Point shootEndPos) {
-    
+
     Enemy *robotBlaster = new Enemy();
     Rect frameRect;
     Point meeleAttackPos;
@@ -51,6 +51,23 @@ Enemy *RobotBlaster::initwithStartPosition(Point position, double actionTime, vo
 
     if ((defPosition == POS8) || (defPosition == POS7) || (defPosition == POS1)){
         /******** Missing Codee *********/
+        for(int i = 1; i <= frames; i++) {
+            char stringBuffer[50];
+            printf(stringBuffer, "%s_back_%d.png",name.c_str(),i);
+            string frameName = stringBuffer;
+            SpriteFrame *frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
+            frameRect = frame->getRect();
+            meeleAttackPos = Vec2(params->lowerAction.x * frameRect.size.width, frameRect.size.height*params->lowerAction.y);
+            //Sprite::createWithSpriteFrame(frame);
+
+            //Check why how to onvert spriteframe to animationframe
+
+            //divideAnimations(frame, animFrames, attackFrames, i);
+        }
+
+
+
+
     }else if ((defPosition == POS3) || (defPosition == POS4) || (defPosition == POS5)) {
         /******** Missing Codee *********/
     }else{
@@ -112,11 +129,34 @@ void RobotBlaster::initializeAnimationsCallBack() {
 
 
 
-void RobotBlaster::divideAnimations(SpriteFrame *frame,
-                                    std::vector<SpriteFrame> *animFrames,
-                                    std::vector<SpriteFrame> *attackFrames,
-                                    int frameidex) {
+void RobotBlaster::divideAnimations(AnimationFrame *frame,
+                                    Vector<AnimationFrame *> animFrames,
+                                    Vector<AnimationFrame *> attackFrames,
+                                    int frameindex) {
 
+    if (attackType == EnemyParams::AUTODESTRUCTION ){
+
+        if (frameindex <= 2) {
+            animFrames.pushBack(frame);
+        }else{
+            attackFrames.pushBack(frame);
+        }
+    }else{
+        switch(frameindex) {
+            case 1:
+                animFrames.pushBack(frame);
+                break;
+            case 2:
+                animFrames.pushBack(frame);
+                attackFrames.pushBack(frame);
+                break;
+            case 3:
+                attackFrames.pushBack(frame);
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 void RobotBlaster::startMovement() {
