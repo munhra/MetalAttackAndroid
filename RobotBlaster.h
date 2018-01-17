@@ -49,9 +49,9 @@ private:
     CallFunc *doEndMeeleAttackAnim;
     CallFunc *doEndAttackAnim;
 
-    virtual void divideAnimations(AnimationFrame *frame,
-                                  Vector<AnimationFrame *> animFrames,
-                                  Vector<AnimationFrame *> attackFrames,
+    virtual void divideAnimations(SpriteFrame *frame,
+                                  Vector<SpriteFrame *> animFrames,
+                                  Vector<SpriteFrame *> attackFrames,
                                   int frameindex);
 
 

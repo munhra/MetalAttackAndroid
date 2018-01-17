@@ -39,8 +39,8 @@ Enemy *RobotBlaster::initwithStartPosition(Point position, double actionTime, vo
     dropCoinLowerLevel = params->dropCoinLowerLevel;
     dropCoinHighLevel = params->dropCoinHighLevel;
 
-    Vector<AnimationFrame *> animFrames;
-    Vector<AnimationFrame *> attackFrames;
+    Vector<SpriteFrame *> animFrames;
+    Vector<SpriteFrame *> attackFrames;
 
     Animate *attackAnim;
 
@@ -50,35 +50,75 @@ Enemy *RobotBlaster::initwithStartPosition(Point position, double actionTime, vo
 
 
     if ((defPosition == POS8) || (defPosition == POS7) || (defPosition == POS1)){
-        /******** Missing Codee *********/
+
+        shootZIndex = 49;
+
         for(int i = 1; i <= frames; i++) {
             char stringBuffer[50];
             printf(stringBuffer, "%s_back_%d.png",name.c_str(),i);
             string frameName = stringBuffer;
             SpriteFrame *frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
             frameRect = frame->getRect();
-            meeleAttackPos = Vec2(params->lowerAction.x * frameRect.size.width, frameRect.size.height*params->lowerAction.y);
-            //Sprite::createWithSpriteFrame(frame);
-
-            //Check why how to onvert spriteframe to animationframe
-
-            //divideAnimations(frame, animFrames, attackFrames, i);
+            meeleAttackPos = Vec2(params->lowerAction.x * frameRect.size.width,
+                                  frameRect.size.height*params->lowerAction.y);
+            divideAnimations(frame, animFrames, attackFrames, i);
         }
 
-
-
+        if (defPosition == POS7) {
+            enemySprite->setFlippedX(true);
+            meeleAttackPos = Vec2(params->fLowerAction.x * frameRect.size.width,
+                                  frameRect.size.height * params->fLowerAction.y);
+        }
 
     }else if ((defPosition == POS3) || (defPosition == POS4) || (defPosition == POS5)) {
-        /******** Missing Codee *********/
+
+        shootZIndex = 30;
+
+        for(int i = 1; i <= frames; i++) {
+            char stringBuffer[50];
+            printf(stringBuffer, "%s_front_%d.png",name.c_str(),i);
+            string frameName = stringBuffer;
+            SpriteFrame *frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
+            frameRect = frame->getRect();
+            meeleAttackPos = Vec2(params->upperAction.x*frameRect.size.width,
+                                  frameRect.size.height*params->upperAction.y);
+            divideAnimations(frame, animFrames, attackFrames, i);
+        }
+
+        if (defPosition == POS5) {
+            enemySprite->setFlippedX(true);
+            meeleAttackPos = Vec2(params->fUpperAction.x*frameRect.size.width,
+                                  frameRect.size.height*params->fUpperAction.y);
+        }
+
     }else{
-        /******** Missing Codee *********/
+
+        shootZIndex = 30;
+
+        for(int i = 1; i <= frames; i++) {
+            char stringBuffer[50];
+            printf(stringBuffer, "%s_left_%d.png",name.c_str(),i);
+            string frameName = stringBuffer;
+            SpriteFrame *frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
+            frameRect = frame->getRect();
+            meeleAttackPos = Vec2(params->sideAction.x*frameRect.size.width,
+                                  frameRect.size.height*params->sideAction.y);
+            divideAnimations(frame, animFrames, attackFrames, i);
+        }
+
+        if (defPosition == POS2) {
+            enemySprite->setFlippedX(false);
+            meeleAttackPos = Vec2(params->fSideAction.x*frameRect.size.width,
+                                  frameRect.size.height*params->fSideAction.y);
+        }
+
     }
 
     enemySprite->setScaleX(0.25);
     enemySprite->setScaleY(0.25);
 
-    Animation *animation = Animation::create(animFrames, 0.09, 0);
-    Animation *attackAnimation = Animation::create(attackFrames, 0.09, 0);
+    Animation *animation = Animation::createWithSpriteFrames(animFrames, 0.09, 0);
+    Animation *attackAnimation = Animation::createWithSpriteFrames(attackFrames, 0.09, 0);
 
     enemySprite->setPosition(position);
     enemyAction = RepeatForever::create(Animate::create(animation));
@@ -129,9 +169,9 @@ void RobotBlaster::initializeAnimationsCallBack() {
 
 
 
-void RobotBlaster::divideAnimations(AnimationFrame *frame,
-                                    Vector<AnimationFrame *> animFrames,
-                                    Vector<AnimationFrame *> attackFrames,
+void RobotBlaster::divideAnimations(SpriteFrame *frame,
+                                    Vector<SpriteFrame *> animFrames,
+                                    Vector<SpriteFrame *> attackFrames,
                                     int frameindex) {
 
     if (attackType == EnemyParams::AUTODESTRUCTION ){
