@@ -32,59 +32,83 @@ void LevelSceneController::loadEnemyDictFromJson() {
         stringstream enemyKey;
         EnemyParams *robot = new EnemyParams();
 
-        /*
-         * robot.armor = [[enemyInfo valueForKey:@"armor"] floatValue];
-        robot.weaponDamage = [[enemyInfo valueForKey:@"weaponDamage"] floatValue];
-        robot.scorePoints = [[enemyInfo valueForKey:@"scorePoints"] floatValue];
-        robot.numberOfFrames = [[enemyInfo valueForKey:@"numberOfFrames"] intValue];
-        robot.timeToReach = [[enemyInfo valueForKey:@"timeToReach"] doubleValue];
-        robot.typeOfPowerUp = [[enemyInfo valueForKey:@"typeOfPowerUp"] floatValue];
-        robot.atackType = [self getEnemyAtackType:enemyInfo];
-
-        robot.lowerAction = ccp([[enemyInfo valueForKey:@"lowerActionX"] floatValue], [[enemyInfo valueForKey:@"lowerActionY"] floatValue]);
-        robot.sideAction = ccp([[enemyInfo valueForKey:@"sideActionX"] floatValue], [[enemyInfo valueForKey:@"sideActionY"] floatValue]);
-        robot.upperAction = ccp([[enemyInfo valueForKey:@"upperActionX"] floatValue], [[enemyInfo valueForKey:@"upperActionY"] floatValue]);
-
-        robot.fLowerAction = ccp([[enemyInfo valueForKey:@"flipLowerActionX"] floatValue], [[enemyInfo valueForKey:@"flipLowerActionY"] floatValue]);
-        robot.fSideAction = ccp([[enemyInfo valueForKey:@"flipSideActionX"] floatValue], [[enemyInfo valueForKey:@"flipSideActionY"] floatValue]);
-        robot.fUpperAction = ccp([[enemyInfo valueForKey:@"flipUpperActionX"] floatValue], [[enemyInfo valueForKey:@"flipUpperActionY"] floatValue]);
-
-        robot.shootSound = [enemyInfo valueForKey:@"shootSound"];
-        robot.shootHit = [enemyInfo valueForKey:@"shootHit"];
-
-        robot.dropCoinLowerLevel = [[enemyInfo valueForKey:@"dropCoinLowerLevel"] intValue];
-        robot.dropCoinHighLevel = [[enemyInfo valueForKey:@"dropCoinHighLevel"] intValue];
-
-        if (robot.atackType == WALK_SHOOT) {
-            robot.shootStartPosition = ccp([[enemyInfo valueForKey:@"shootStartX"] intValue],
-                                           [[enemyInfo valueForKey:@"shootStartY"] intValue]);
-            robot.shootStyle = [self convertShootStyle:[[enemyInfo valueForKey:@"shootStyle"] intValue]];
-        }
-
-         */
-
-
         enemyKey << "enemy" << enemyIndex;
 
         robot->enemyName = result[enemyKey.str().c_str()]["enemyName"].GetString();
-        //robot->weaponDamage = result[enemyKey.str().c_str()]["weaponDamage"].GetFloat();
-        //robot->scorePoints = result[enemyKey.str().c_str()]["scorePoints"].GetFloat();
-        //robot->numberOfFrames = result[enemyKey.str().c_str()]["numberOfFrames"].GetInt();
-        //robot->timeToReach = result[enemyKey.str().c_str()]["timeToReach"].GetDouble();
-        //robot->typeOfPowerUp = result[enemyKey.str().c_str()]["typeOfPowerUp"].GetFloat();
-        //robot->atackType
+        robot->weaponDamage = atof(result[enemyKey.str().c_str()]["weaponDamage"].GetString());
+        robot->scorePoints = atof(result[enemyKey.str().c_str()]["scorePoints"].GetString());
+        robot->numberOfFrames = atoi(result[enemyKey.str().c_str()]["numberOfFrames"].GetString());
+        robot->timeToReach = atof(result[enemyKey.str().c_str()]["timeToReach"].GetString());
 
-        //robot->fLowerAction = Vec2(result[enemyKey.str().c_str()]["lowerActionX"].GetFloat()
-        //        ,result[enemyKey.str().c_str()]["lowerActionY"].GetFloat());
+        robot->typeOfPowerUp = EnemyParams::COIN;
 
-
-        enemyDictMutable[robot->enemyName] = robot;
+        string isMeele = result[enemyKey.str().c_str()]["meele"].GetString();
+        string isAutoDestruction = result[enemyKey.str().c_str()]["autoDestruction"].GetString();
+        robot->atackType = getEnemyAtackType(isAutoDestruction, isMeele);
 
 
+        if (robot->atackType != EnemyParams::AUTODESTRUCTION) {
 
+            robot->lowerAction = Vec2(atof(result[enemyKey.str().c_str()]["lowerActionX"].GetString()),
+                                      atof(result[enemyKey.str().c_str()]["lowerActionY"].GetString()));
+
+            robot->sideAction = Vec2(atof(result[enemyKey.str().c_str()]["sideActionX"].GetString()),
+                                     atof(result[enemyKey.str().c_str()]["sideActionY"].GetString()));
+
+            robot->upperAction = Vec2(atof(result[enemyKey.str().c_str()]["upperActionX"].GetString()),
+                                      atof(result[enemyKey.str().c_str()]["upperActionY"].GetString()));
+
+
+
+            robot->fLowerAction = Vec2(atof(result[enemyKey.str().c_str()]["flipLowerActionX"].GetString()),
+                                       atof(result[enemyKey.str().c_str()]["flipLowerActionY"].GetString()));
+
+
+            robot->fSideAction = Vec2(atof(result[enemyKey.str().c_str()]["flipSideActionX"].GetString()),
+                                      atof(result[enemyKey.str().c_str()]["flipSideActionY"].GetString()));
+
+
+            robot->fUpperAction = Vec2(atof(result[enemyKey.str().c_str()]["flipUpperActionX"].GetString()),
+                                       atof(result[enemyKey.str().c_str()]["flipUpperActionY"].GetString()));
+        }
+
+        robot->shootSound = result[enemyKey.str().c_str()]["shootSound"].GetString();
+        robot->shootSound = result[enemyKey.str().c_str()]["shootHit"].GetString();
+        robot->dropCoinHighLevel = atoi(result[enemyKey.str().c_str()]["dropCoinLowerLevel"].GetString());
+        robot->dropCoinLowerLevel = atoi(result[enemyKey.str().c_str()]["dropCoinLowerLevel"].GetString());
+
+        if (robot->atackType == EnemyParams::WALK_SHOOT) {
+            robot->shootStyle = convertShootStyle(atoi(result[enemyKey.str().c_str()]["shootStyle"].GetString()));
+            robot->shootStartPosition = Vec2(atoi(result[enemyKey.str().c_str()]["shootStartX"].GetString()),
+                                             atoi(result[enemyKey.str().c_str()]["shootStyle"].GetString()));
+        }
     }
 
     CCLOG("Ended Parse Enemies");
+}
+
+EnemyParams::ShootStyle LevelSceneController::convertShootStyle(int style) {
+    switch (style) {
+        case 0:
+            return EnemyParams::SINGLE;
+        case 1:
+            return EnemyParams::ROTATION;
+        case 2:
+            return EnemyParams::JUMP;
+        default:
+            return EnemyParams::SINGLE;
+    }
+}
+
+EnemyParams::AtackType LevelSceneController::getEnemyAtackType(string isAutoDestruction, string isMeele) {
+
+    if (isMeele.compare("YES") == 0) {
+        return EnemyParams::MEELEE;
+    }else if (isAutoDestruction.compare("YES") == 0) {
+        return EnemyParams::AUTODESTRUCTION;
+    }else{
+        return EnemyParams::WALK_SHOOT;
+    }
 }
 
 void LevelSceneController::loadLevelJson() {

@@ -55,7 +55,8 @@ Enemy *RobotBlaster::initwithStartPosition(Point position, double actionTime, vo
 
         for(int i = 1; i <= frames; i++) {
             char stringBuffer[50];
-            printf(stringBuffer, "%s_back_%d.png",name.c_str(),i);
+
+            snprintf(stringBuffer, sizeof(stringBuffer), "%s_back_%d.png",name.c_str(),i);
             string frameName = stringBuffer;
             SpriteFrame *frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
             frameRect = frame->getRect();
@@ -76,7 +77,10 @@ Enemy *RobotBlaster::initwithStartPosition(Point position, double actionTime, vo
 
         for(int i = 1; i <= frames; i++) {
             char stringBuffer[50];
-            printf(stringBuffer, "%s_front_%d.png",name.c_str(),i);
+
+            snprintf(stringBuffer, sizeof(stringBuffer), "%s_front_%d.png",name.c_str(),i);
+
+            //printf(stringBuffer, "%s_front_%d.png",name.c_str(),i);
             string frameName = stringBuffer;
             SpriteFrame *frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
             frameRect = frame->getRect();
@@ -97,7 +101,8 @@ Enemy *RobotBlaster::initwithStartPosition(Point position, double actionTime, vo
 
         for(int i = 1; i <= frames; i++) {
             char stringBuffer[50];
-            printf(stringBuffer, "%s_left_%d.png",name.c_str(),i);
+            snprintf(stringBuffer, sizeof(stringBuffer), "%s_left_%d.png",name.c_str(),i);
+            //printf(stringBuffer, "%s_left_%d.png",name.c_str(),i);
             string frameName = stringBuffer;
             SpriteFrame *frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(frameName);
             frameRect = frame->getRect();

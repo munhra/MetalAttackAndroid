@@ -5,6 +5,7 @@
 #ifndef PROJ_ANDROID_STUDIO_LEVELSCENECONTROLLER_H
 #define PROJ_ANDROID_STUDIO_LEVELSCENECONTROLLER_H
 
+#include <json/document.h>
 #include "cocos2d.h"
 #include "vector"
 #include "EnemyParams.h"
@@ -43,6 +44,8 @@ public:
 private:
 
     static LevelSceneController *instance;
+    virtual EnemyParams::AtackType getEnemyAtackType(string isAutoDestruction, string isMeele);
+    virtual EnemyParams::ShootStyle convertShootStyle(int style);
 
 
 protected:
