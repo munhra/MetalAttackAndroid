@@ -28,6 +28,8 @@ void LevelSceneController::loadEnemyDictFromJson() {
     rapidjson::Document result;
     result.Parse<0>(jsonString.c_str());
 
+    enemyDictMutable = new map<string, EnemyParams *>();
+
     for (int enemyIndex = 1 ; enemyIndex <= 25 ; enemyIndex++) {
         stringstream enemyKey;
         EnemyParams *robot = new EnemyParams();
@@ -82,7 +84,12 @@ void LevelSceneController::loadEnemyDictFromJson() {
             robot->shootStartPosition = Vec2(atoi(result[enemyKey.str().c_str()]["shootStartX"].GetString()),
                                              atoi(result[enemyKey.str().c_str()]["shootStyle"].GetString()));
         }
+
+        enemyDictMutable->emplace(robot->enemyName, robot);
     }
+
+
+
 
     CCLOG("Ended Parse Enemies");
 }
@@ -217,7 +224,7 @@ vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int
 
         randonEnemy = rand() % typeOfEnemies;
         enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
-        eparams = enemyDictMutable[enemyName];
+        eparams = enemyDictMutable->at(enemyName.c_str());
         eparams->typeOfPowerUp = EnemyParams::COIN;
 
         newEnemy1 = new RobotBlaster();
@@ -232,7 +239,7 @@ vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int
 
         randonEnemy = rand() % typeOfEnemies;
         enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
-        eparams = enemyDictMutable[enemyName];
+        eparams = enemyDictMutable->at(enemyName.c_str());
         eparams->typeOfPowerUp = EnemyParams::COIN;
 
         newEnemy1 = new RobotBlaster();
@@ -247,7 +254,7 @@ vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int
 
         randonEnemy = rand() % typeOfEnemies;
         enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
-        eparams = enemyDictMutable[enemyName];
+        eparams = enemyDictMutable->at(enemyName.c_str());
         eparams->typeOfPowerUp = EnemyParams::COIN;
 
         newEnemy1 = new RobotBlaster();
@@ -261,7 +268,7 @@ vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int
 
         randonEnemy = rand() % typeOfEnemies;
         enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
-        eparams = enemyDictMutable[enemyName];
+        eparams = enemyDictMutable->at(enemyName.c_str());
         eparams->typeOfPowerUp = EnemyParams::COIN;
 
         newEnemy1 = new RobotBlaster();
@@ -275,7 +282,7 @@ vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int
 
         randonEnemy = rand() % typeOfEnemies;
         enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
-        eparams = enemyDictMutable[enemyName];
+        eparams = enemyDictMutable->at(enemyName.c_str());
         eparams->typeOfPowerUp = EnemyParams::COIN;
 
         newEnemy1 = new RobotBlaster();
@@ -289,7 +296,7 @@ vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int
 
         randonEnemy = rand() % typeOfEnemies;
         enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
-        eparams = enemyDictMutable[enemyName];
+        eparams = enemyDictMutable->at(enemyName.c_str());
         eparams->typeOfPowerUp = EnemyParams::COIN;
 
         newEnemy1 = new RobotBlaster();
@@ -303,7 +310,7 @@ vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int
 
         randonEnemy = rand() % typeOfEnemies;
         enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
-        eparams = enemyDictMutable[enemyName];
+        eparams = enemyDictMutable->at(enemyName.c_str());
         eparams->typeOfPowerUp = EnemyParams::COIN;
 
         newEnemy1 = new RobotBlaster();
@@ -317,7 +324,7 @@ vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int
 
         randonEnemy = rand() % typeOfEnemies;
         enemyName = loadlevel->avaliableEnemies.at(randonEnemy);
-        eparams = enemyDictMutable[enemyName];
+        eparams = enemyDictMutable->at(enemyName.c_str());
         eparams->typeOfPowerUp = EnemyParams::COIN;
 
         newEnemy1 = new RobotBlaster();

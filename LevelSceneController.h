@@ -39,7 +39,7 @@ public:
     virtual void loadLevelJson();
     virtual void startEnemyMovment();
 
-    map<string, EnemyParams *> enemyDictMutable;
+    map<string, EnemyParams *> *enemyDictMutable;
 
 private:
 
