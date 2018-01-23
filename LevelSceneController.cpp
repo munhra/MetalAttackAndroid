@@ -370,6 +370,13 @@ void LevelSceneController::startEnemyMovment() {
     }
 }
 
+
+Level *LevelSceneController::loadLevelWave(int levelNumber, int wave, LevelScene * scnDelegate) {
+
+
+
+}
+
 LevelSceneController::LevelSceneController() {
 
 }

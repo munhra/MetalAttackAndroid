@@ -8,6 +8,7 @@
 #include "cocos2d.h"
 #include "Enemy.h"
 #include "vector"
+#include "UniversalInfo.h"
 
 USING_NS_CC;
 
@@ -39,7 +40,7 @@ public:
     virtual int receiveHeroShoot(float damage, bool killNow, Rect shootRect) override ;
 
 
-    void update(float) override;
+    //void update(float) override;
 
     RobotBlaster();
     ~RobotBlaster();

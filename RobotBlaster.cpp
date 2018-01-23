@@ -4,6 +4,7 @@
 
 #include "RobotBlaster.h"
 #include "LevelScene.h"
+#include "UniversalInfo.h"
 
 bool RobotBlaster::init() {
 
@@ -172,8 +173,6 @@ void RobotBlaster::initializeAnimationsCallBack() {
 }
 
 
-
-
 void RobotBlaster::divideAnimations(SpriteFrame *frame,
                                     Vector<SpriteFrame *> animFrames,
                                     Vector<SpriteFrame *> attackFrames,
@@ -206,16 +205,46 @@ void RobotBlaster::divideAnimations(SpriteFrame *frame,
 
 void RobotBlaster::startMovement() {
 
+    LevelScene *sceneDelegate = (LevelScene *) delegate;
 
+    if (sceneDelegate->isGameOver()) {
+        sceneDelegate->addEnemySprite(this);
+
+        Point bandRelPosition = sceneDelegate->bandSprite->getPosition();
+        Point bassRelPos = sceneDelegate->bandSprite->bass->getPosition();
+        Point leadRelPos = sceneDelegate->bandSprite->leadGuitar->getPosition();
+
+        Size screnSize = Director::getInstance()->getWinSize();
+        Point bandSprtAbsPos = Vec2(bandRelPosition.x * screnSize.width,
+                                    bandRelPosition.y * screnSize.height);
+
+        Vec2 bassPosition =  bassRelPos + bandSprtAbsPos;
+        Vec2 leadGuitarPosition = leadRelPos + bandSprtAbsPos;
+
+        if (definedPosition == POS2){
+            enemySprite->runAction(MoveTo::create(timeToReach, leadGuitarPosition));
+        }else if (definedPosition == POS6){
+            enemySprite->runAction(MoveTo::create(timeToReach, bassPosition));
+        }else{
+            enemySprite->runAction(MoveTo::create(timeToReach, UniversalInfo::sharedInstance()->screenCenter()));
+        }
+
+        isInMovement = true;
+    }
 }
 
 void RobotBlaster::restartMovement() {
 
 }
-
+/*
 void RobotBlaster::update(float delta) {
+    //call super from update
+    Enemy::update(delta);
+    (Director::getInstance()->isPaused() == false);
+    //if (([[CCDirector sharedDirector]isPaused] == NO) && (gameState != GAME_OVER)){
 
-}
+    //}
+}*/
 
 void RobotBlaster::performGeneralHitAnimation(Point hitPoint) {
 

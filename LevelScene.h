@@ -52,21 +52,28 @@ public:
     Sprite *enemyPOS7;
     Sprite *enemyPOS8;
 
-    //NSMutableArray *coinAnimFrames;
+
 
     int coinMultiplier;
     bool noCoolDown;
 
-    /*
-    RevivalPowerUp *revivalPowerUp;
-    CoinMultiplierPowerUp *coinMultiplierPowerUp;
-    HealthPowerUp *healthPowerUp;
-    */
 
-    //WaveClearedBanner *waveClearedSprite;
+    BandSprite *bandSprite;
+
 
     int levelContext;
 
+    virtual bool isGameOver();
+    virtual void addEnemySprite(Enemy *enemy);
+    void update(float) override;
+    void onEnter() override;
+
+
+
+private:
+
+    virtual void activateEnemies();
+    virtual void doLevelEnterAnimation();
 
 protected:
     LevelScene();
