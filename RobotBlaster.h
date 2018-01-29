@@ -8,6 +8,7 @@
 #include "cocos2d.h"
 #include "Enemy.h"
 #include "vector"
+#include "UniversalInfo.h"
 
 USING_NS_CC;
 

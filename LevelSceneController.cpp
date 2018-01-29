@@ -17,6 +17,12 @@ LevelSceneController *LevelSceneController::sharedInstance() {
     return LevelSceneController::instance;
 }
 
+
+void LevelSceneController::onEnter() {
+    Node::onEnter();
+    this->scheduleUpdate();
+}
+
 void LevelSceneController::loadEnemyDictFromJson() {
 
     CCLOG("loadEnemyDictFromJson");
@@ -335,6 +341,8 @@ vector<RobotBlaster *> *LevelSceneController::createEnemies(int levelNumber, int
         stageEnemyArray->push_back(newEnemy1);
 
     }
+
+    return stageEnemyArray;
 }
 
 Scene *LevelSceneController::loadLevelScene(int levelNumber, int wave) {
@@ -355,19 +363,44 @@ Scene *LevelSceneController::loadLevelScene(int levelNumber, int wave) {
     scnDelegate->levelNumber = levelNumber;
     scnDelegate->levelContext = levelContext;
     scnDelegate->levelEnemiesLeft = loadlevel->totalLevelEnemies;
-    scnDelegate->waveEnemiesLeft = loadlevel->waves.at(wave);
+    //scnDelegate->waveEnemiesLeft = loadlevel->waves.at(wave);
+    scnDelegate->waveEnemiesLeft = 0;
+    scnDelegate->waveNumber = wave;
 
     return (Scene *)scnDelegate;
 }
+
 
 void LevelSceneController::startEnemyMovment() {
     for (int enemyIndex = 0; enemyIndex < enemyArray->size(); enemyIndex++) {
         RobotBlaster *enemy = enemyArray->at(enemyIndex);
         enemy->delegate = scnDelegate;
-        auto enemyStartMovementCallBack = [&enemy](float time) {enemy->startMovement();};
-        string enemyKey;
-        this->scheduleOnce(enemyStartMovementCallBack, 1, enemyKey);
+        Director::getInstance()->getScheduler()->schedule([enemy](float dt) {
+            enemy->startMovement();
+        },this, 0, 0, enemy->timeToStart, false, "dummyKey");
     }
+}
+
+
+Level *LevelSceneController::loadLevelWave(int levelNumber, int wave, LevelScene * scnDelegate) {
+
+    enemyArray = new vector<RobotBlaster *>();
+    Level *loadlevel = loadedLevels->at(levelNumber);
+    int groupCount = loadlevel->waves.at(wave) / 8;
+
+    enemyArray = createEnemies(levelNumber, wave);
+
+    for (int enemyIndx = 0; enemyIndx < enemyArray->size(); enemyIndx++) {
+        RobotBlaster *enemy = enemyArray->at(enemyIndx);
+        enemy->delegate = scnDelegate;
+
+        Director::getInstance()->getScheduler()->schedule([enemy](float dt) {
+            enemy->startMovement();
+
+        },this, 0, 0, enemy->timeToStart, false, "dummyKey");
+    }
+
+    return loadlevel;
 }
 
 LevelSceneController::LevelSceneController() {

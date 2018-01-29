@@ -38,7 +38,8 @@ bool UniversalInfo::isDeviceIpad() {
 }
 
 Point UniversalInfo::screenCenter() {
-
+    return Vec2(Director::getInstance()->getWinSize().width * 0.5,
+                Director::getInstance()->getWinSize().height * 0.5);
 }
 
 Point UniversalInfo::enemyPosition1() {

@@ -38,15 +38,16 @@ public:
     virtual vector<RobotBlaster *> *createEnemies(int levelNumber, int wave);
     virtual void loadLevelJson();
     virtual void startEnemyMovment();
+    virtual Level *loadLevelWave(int levelNumber, int wave, LevelScene * scnDelegate);
 
     map<string, EnemyParams *> *enemyDictMutable;
+    void onEnter() override;
 
 private:
 
     static LevelSceneController *instance;
     virtual EnemyParams::AtackType getEnemyAtackType(string isAutoDestruction, string isMeele);
     virtual EnemyParams::ShootStyle convertShootStyle(int style);
-
 
 protected:
     LevelSceneController();
