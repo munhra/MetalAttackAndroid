@@ -74,6 +74,8 @@ private:
 
     virtual void activateEnemies();
     virtual void doLevelEnterAnimation();
+    virtual void releaseNewWave();
+    virtual void doWaveClearedAnimation(int waveNumberCleared);
 
 protected:
     LevelScene();

@@ -12,6 +12,9 @@ bool LevelScene::init() {
         return false;
     }
 
+    this->scheduleUpdate();
+    gameState = UniversalInfo::GAME_STARTED;
+    waveEnemiesLeft = 0;
     return true;
 }
 
@@ -35,19 +38,44 @@ void  LevelScene::activateEnemies() {
 
 }
 
+
 void LevelScene::onEnter() {
-
+    Node::onEnter();
     this->doLevelEnterAnimation();
-
 }
 
 void LevelScene::doLevelEnterAnimation() {
     activateEnemies();
 }
 
-void LevelScene::update(float) {
+void LevelScene::update(float delta) {
 
+    if ((waveEnemiesLeft == 0) && (gameState == UniversalInfo::GAME_STARTED)) {
+        doWaveClearedAnimation(waveNumber);
+    }
+
+
+
+    //if ((Director::getInstance()->isPaused() == false) && (gameState != UniversalInfo::GAME_OVER)) {
+
+    //}else if ((waveEnemiesLeft == 0) && (gameState == UniversalInfo::GAME_STARTED)){
+        //doWaveClearedAnimation(waveNumber);
+    //}else{
+
+    //}
 }
+
+void LevelScene::doWaveClearedAnimation(int waveNumberCleared) {
+    releaseNewWave();
+}
+
+void LevelScene::releaseNewWave() {
+    LevelSceneController *lvcontroller = LevelSceneController::sharedInstance();
+    currentLevel = lvcontroller->loadLevelWave(levelNumber, waveNumber, this);
+    waveEnemiesLeft = currentLevel->waves.at(waveNumber);
+    gameState = UniversalInfo::GAME_STARTED;
+}
+
 
 LevelScene::LevelScene() {
 

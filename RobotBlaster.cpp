@@ -169,7 +169,6 @@ void RobotBlaster::initializeAnimationsCallBack() {
     doEndAttackAnim = CallFunc::create([](){
 
     });
-
 }
 
 
@@ -207,7 +206,7 @@ void RobotBlaster::startMovement() {
 
     LevelScene *sceneDelegate = (LevelScene *) delegate;
 
-    if (sceneDelegate->isGameOver()) {
+    if (!sceneDelegate->isGameOver()) {
         sceneDelegate->addEnemySprite(this);
 
         Point bandRelPosition = sceneDelegate->bandSprite->getPosition();
@@ -236,15 +235,12 @@ void RobotBlaster::startMovement() {
 void RobotBlaster::restartMovement() {
 
 }
-/*
-void RobotBlaster::update(float delta) {
-    //call super from update
-    Enemy::update(delta);
-    (Director::getInstance()->isPaused() == false);
-    //if (([[CCDirector sharedDirector]isPaused] == NO) && (gameState != GAME_OVER)){
 
-    //}
-}*/
+void RobotBlaster::update(float delta) {
+    //Enemy::update(delta);
+    //(Director::getInstance()->isPaused() == false);
+
+}
 
 void RobotBlaster::performGeneralHitAnimation(Point hitPoint) {
 

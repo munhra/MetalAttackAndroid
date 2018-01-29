@@ -40,7 +40,7 @@ public:
     virtual int receiveHeroShoot(float damage, bool killNow, Rect shootRect) override ;
 
 
-    //void update(float) override;
+    void update(float) override;
 
     RobotBlaster();
     ~RobotBlaster();

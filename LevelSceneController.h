@@ -41,6 +41,7 @@ public:
     virtual Level *loadLevelWave(int levelNumber, int wave, LevelScene * scnDelegate);
 
     map<string, EnemyParams *> *enemyDictMutable;
+    void onEnter() override;
 
 private:
 
